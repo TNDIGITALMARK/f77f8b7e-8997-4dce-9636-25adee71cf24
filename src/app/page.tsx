@@ -1,37 +1,60 @@
-export const dynamic = 'force-dynamic'
+import Link from 'next/link';
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
+import ProjectCard from '@/components/ProjectCard';
+import { featuredProjects } from '@/lib/projects-data';
 
-export default function Index() {
+export const dynamic = 'force-dynamic';
+
+export default function Home() {
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="text-center max-w-2xl px-4">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your App</h1>
-        <p className="text-xl mb-6 text-gray-600">
-          This template is configured to be absolutely lenient - builds never fail on validation errors.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-left">
-          <div className="p-4 bg-green-50 rounded-lg border border-green-200">
-            <h3 className="font-semibold text-green-800 mb-2">✅ Always Builds</h3>
-            <ul className="text-green-700 space-y-1">
-              <li>• TypeScript errors ignored</li>
-              <li>• ESLint warnings ignored</li>
-              <li>• Global error boundaries</li>
-              <li>• Asset type safety</li>
-            </ul>
+    <>
+      <Navigation />
+
+      <main className="min-h-screen pt-24">
+        {/* Hero Section */}
+        <section className="max-w-[1200px] mx-auto px-6 py-16">
+          <div className="mb-16">
+            <h1 className="khela-logo-text mb-8">Khela Design</h1>
+            <h2 className="text-5xl font-bold text-gray-900 mb-6 max-w-3xl leading-tight">
+              Design accessibile, onesto e indispensabile
+            </h2>
+            <p className="text-lg text-gray-600 mb-8 max-w-2xl">
+              Michela Rossi è product & visual designer specializzata in sustainable soluzioni.
+            </p>
+            <Link
+              href="/projects"
+              className="inline-block px-8 py-4 bg-[hsl(var(--khela-accent))] text-white rounded-lg font-medium hover:opacity-90 transition-all hover:transform hover:translate-y-[-2px]"
+            >
+              Scopri i miei lavori
+            </Link>
           </div>
-          <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
-            <h3 className="font-semibold text-blue-800 mb-2">🚀 Production Ready</h3>
-            <ul className="text-blue-700 space-y-1">
-              <li>• Next.js 15.5.2 App Router</li>
-              <li>• Vercel optimized</li>
-              <li>• SSR/SEO friendly</li>
-              <li>• Browser API protection</li>
-            </ul>
+
+          {/* Featured Projects Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-20">
+            {featuredProjects.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))}
           </div>
-        </div>
-        <p className="mt-6 text-gray-500">
-          Start building your amazing project here! This template will never fail builds due to validation errors.
-        </p>
-      </div>
-    </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="max-w-[1200px] mx-auto px-6 py-16 mt-12">
+          <div className="bg-gray-50 rounded-2xl p-12 text-center">
+            <h3 className="text-3xl font-bold text-gray-900 mb-4">
+              Ready to start your project?
+            </h3>
+            <Link
+              href="/contact"
+              className="inline-block px-8 py-4 bg-[hsl(var(--khela-accent))] text-white rounded-lg font-medium hover:opacity-90 transition-all hover:transform hover:translate-y-[-2px] mt-4"
+            >
+              Let's Connect
+            </Link>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </>
   );
 }
